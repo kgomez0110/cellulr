@@ -72,6 +72,12 @@ var app =
 		global.mobile = true;
 	}
 
+	var users = [];
+	window.canvas = new Canvas();
+	var c = window.canvas.cv;
+	var graph = c.getContext('2d');
+	// window.chat = new ChatClient();
+
 	function startGame(type) {
 		global.playerName = playerNameInput.value.replace(/(<([^>]+)>)/ig, '').substring(0, 25);
 		global.playerType = type;
@@ -89,8 +95,8 @@ var app =
 		}
 		if (!global.animLoopHandle) animloop();
 		socket.emit('respawn');
-		window.chat.socket = socket;
-		window.chat.registerFunctions();
+		// window.chat.socket = socket;
+		// window.chat.registerFunctions();
 		window.canvas.socket = socket;
 		global.socket = socket;
 	}
@@ -269,12 +275,6 @@ var app =
 		}
 	}
 
-	var users = [];
-	window.canvas = new Canvas();
-	var c = window.canvas.cv;
-	var graph = c.getContext('2d');
-	window.chat = new ChatClient();
-
 	var visibleBorderSetting = document.getElementById('visBord');
 	visibleBorderSetting.onchange = settings.toggleBorder;
 
@@ -293,7 +293,7 @@ var app =
 		socket.on('pongcheck', function () {
 			var latency = Date.now() - global.startPingTime;
 			debug('Latency: ' + latency + 'ms');
-			window.chat.addSystemLine('Ping: ' + latency + 'ms');
+			// window.chat.addSystemLine('Ping: ' + latency + 'ms');
 		});
 
 		// Handle error.
@@ -317,8 +317,8 @@ var app =
 			socket.emit('gotit', player);
 			global.gameStart = true;
 			debug('Game started at: ' + global.gameStart);
-			window.chat.addSystemLine('Connected to the game!');
-			window.chat.addSystemLine('Type <b>-help</b> for a list of commands.');
+			// window.chat.addSystemLine('Connected to the game!');
+			// window.chat.addSystemLine('Type <b>-help</b> for a list of commands.');
 			c.focus();
 		});
 
@@ -329,24 +329,24 @@ var app =
 		});
 
 		socket.on('playerDied', function (data) {
-			window.chat.addSystemLine('{GAME} - <b>' + (data.name.length < 1 ? 'An unnamed cell' : data.name) + '</b> was eaten.');
+			// window.chat.addSystemLine('{GAME} - <b>' + (data.name.length < 1 ? 'An unnamed cell' : data.name) + '</b> was eaten.');
 		});
 
 		socket.on('playerDisconnect', function (data) {
-			window.chat.addSystemLine('{GAME} - <b>' + (data.name.length < 1 ? 'An unnamed cell' : data.name) + '</b> disconnected.');
+			// window.chat.addSystemLine('{GAME} - <b>' + (data.name.length < 1 ? 'An unnamed cell' : data.name) + '</b> disconnected.');
 		});
 
 		socket.on('playerJoin', function (data) {
-			window.chat.addSystemLine('{GAME} - <b>' + (data.name.length < 1 ? 'An unnamed cell' : data.name) + '</b> joined.');
+			// window.chat.addSystemLine('{GAME} - <b>' + (data.name.length < 1 ? 'An unnamed cell' : data.name) + '</b> joined.');
 		});
 
 		socket.on('serverMSG', function (data) {
-			window.chat.addSystemLine(data);
+			// window.chat.addSystemLine(data);
 		});
 
 		// Chat.
 		socket.on('serverSendPlayerChat', function (data) {
-			window.chat.addChatLine(data.sender, data.message, false);
+			// window.chat.addChatLine(data.sender, data.message, false);
 		});
 
 		// Handle movement.
@@ -9370,8 +9370,8 @@ var app =
 		virusSides: 20,
 
 		// Canvas
-		screenWidth: window.innerWidth,
-		screenHeight: window.innerHeight,
+		screenWidth: 0,
+		screenHeight: 0,
 		gameWidth: 0,
 		gameHeight: 0,
 		xoffset: -0,
