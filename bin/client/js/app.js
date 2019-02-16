@@ -175,7 +175,7 @@ var app =
 	}
 
 	function drawSquare(x, y, color) {
-		graph.rect((x - 1) * global.screenHeight / 18, (y - 1) * global.screenHeight / 18, global.screenHeight / 18, global.screenHeight / 18);
+		graph.rect(x * global.screenHeight / 18, y * global.screenHeight / 18, global.screenHeight / 18, global.screenHeight / 18);
 		graph.stroke();
 		// graph.fillStyle = 'hsl(' + '#008080' + ', 100%, 50%)';
 		graph.fillStyle = '#008080';

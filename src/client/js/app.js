@@ -17,6 +17,12 @@ if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
     global.mobile = true;
 }
 
+var users = [];
+window.canvas = new Canvas();
+var c = window.canvas.cv;
+var graph = c.getContext('2d');
+window.chat = new ChatClient();
+
 function startGame(type) {
     global.playerName = playerNameInput.value.replace(/(<([^>]+)>)/ig, '').substring(0,25);
     global.playerType = type;
@@ -226,11 +232,7 @@ for (let ii = 0; ii < global.rows; ii++){
     }
 }
 
-var users = [];
-window.canvas = new Canvas();
-var c = window.canvas.cv;
-var graph = c.getContext('2d');
-window.chat = new ChatClient();
+
 
 var visibleBorderSetting = document.getElementById('visBord');
 visibleBorderSetting.onchange = settings.toggleBorder;
